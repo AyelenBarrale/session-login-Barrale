@@ -40,8 +40,8 @@ app.use(
       mongoUrl: process.env.MONGO_URI,
       options,
     }),
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     secret: process.env.SECRET,
     cookie: {
       maxAge: 60000,

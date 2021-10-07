@@ -46,7 +46,7 @@ export async function signin(req, res) {
 
 export async function renderWelcome(req, res) {
   try {
-    res.render("welcome");
+    res.render("welcome", {usuario: req.session.user});
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -54,7 +54,7 @@ export async function renderWelcome(req, res) {
 
 export async function renderLogout(req, res) {
   try {
-    res.render("logout");
+    res.render("logout", {usuario: req.session.user});
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -62,11 +62,12 @@ export async function renderLogout(req, res) {
 
 export async function logout(req, res) {
   try {
+    res.render("logout", {usuario: req.session.user});
     req.session.destroy((err) => {
       if (!err) {
-        res.render("logout");
+        console.log("logout realizado");
       } else {
-        res.json({ err });
+        res.json({ message: err });
       }
     });
   } catch (error) {
